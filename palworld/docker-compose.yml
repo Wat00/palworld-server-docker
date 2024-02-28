@@ -1,0 +1,41 @@
+x-service: &service
+  environment:
+    TINI_KILL_PROCESS_GROUP: 1
+  init: true
+  volumes:
+    - type: volume
+      source: palserver
+      target: &palserver-dir /home/steam/Steam/steamapps/common/PalServer
+    - type: volume
+      source: saved
+      target: &saved-dir /home/steam/Steam/steamapps/common/PalServer/Pal/Saved
+services:
+  steamcmd:
+    <<: *service
+    build:
+      args:
+        SAVED_DIR: *saved-dir
+      target: steamcmd
+    restart: on-failure:3
+  palserver:
+    <<: *service
+    build:
+      args:
+        SAVED_DIR: *saved-dir
+        PALSERVER_DIR: *palserver-dir
+        RCON_PORT: $RCON_PORT
+    command: $COMMAND
+    depends_on:
+      steamcmd:
+        condition: service_completed_successfully
+    ports:
+      - "$PALSERVER_PORT:$PALSERVER_PORT/udp"
+    restart: on-failure
+  rcon:
+    command:
+    entrypoint: /rcon -a palserver:$RCON_PORT -p "$ADMIN_PASSWORD"
+    image: outdead/rcon
+    profiles: [rcon]
+volumes:
+  palserver:
+  saved:
