@@ -84,21 +84,27 @@ Complete Save
 > :q
 ```
 For a full list of commands, see [Commands](https://tech.palworldgame.com/settings-and-operation/commands).
-#### 2.2. Stopping the server
+#### 2.2. Cleanly shutting down the server
+RCON needs to be enabled.
+
+```
+docker compose run --rm rcon Save "Shutdown 1" && docker compose wait palserver
+```
+#### 2.3. Force stopping the server
 
 ```
 docker compose stop
 ```
-#### 2.3. Making a backup
+#### 2.4. Making a backup
 Docker tools which make backups of volumes can be used.
 
 Save files are inside the smaller `palworld_saved` volume and the server installation is inside the bigger `palworld_palserver` volume.
-#### 2.4. Updating the server
+#### 2.5. Updating the server
 
 ```
 docker compose start steamcmd
 ```
-#### 2.5. Starting the server
+#### 2.6. Starting the server
 
 ```
 docker compose restart palserver
