@@ -102,7 +102,7 @@ Save files are inside the smaller `palworld_saved` volume and the server install
 #### 2.5. Updating the server
 
 ```
-docker compose start steamcmd
+docker compose up steamcmd
 ```
 #### 2.6. Starting the server
 
