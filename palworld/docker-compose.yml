@@ -31,11 +31,15 @@ services:
     ports:
       - "$PALSERVER_PORT:$PALSERVER_PORT/udp"
     restart: on-failure
-  rcon:
+  rcon: &rcon
     command:
     entrypoint: /rcon -a palserver:$RCON_PORT -p "$ADMIN_PASSWORD"
     image: outdead/rcon
     profiles: [rcon]
+  shutdown:
+    <<: *rcon
+    command: Save "Shutdown 1"
+    profiles: [shutdown]
 volumes:
   palserver:
   saved:
