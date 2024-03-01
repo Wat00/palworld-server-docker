@@ -88,7 +88,7 @@ For a full list of commands, see [Commands](https://tech.palworldgame.com/settin
 RCON needs to be enabled.
 
 ```
-docker compose up shutdown && docker compose wait palserver
+docker compose up doexit && docker compose wait palserver
 ```
 #### 2.3. Force stopping the server
 

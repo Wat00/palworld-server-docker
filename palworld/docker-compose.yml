@@ -36,10 +36,10 @@ services:
     entrypoint: /rcon -a palserver:$RCON_PORT -p "$ADMIN_PASSWORD"
     image: outdead/rcon
     profiles: [rcon]
-  shutdown:
+  doexit:
     <<: *rcon
-    command: Save "Shutdown 1"
-    profiles: [shutdown]
+    command: Save DoExit
+    profiles: [doexit]
 volumes:
   palserver:
   saved:
