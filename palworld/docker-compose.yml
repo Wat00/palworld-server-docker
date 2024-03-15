@@ -6,22 +6,18 @@ x-service: &service
     - type: volume
       source: palserver
       target: &palserver-dir /home/steam/Steam/steamapps/common/PalServer
-    - type: volume
-      source: saved
-      target: &saved-dir /home/steam/Steam/steamapps/common/PalServer/Pal/Saved
 services:
   steamcmd:
     <<: *service
     build:
       args:
-        SAVED_DIR: *saved-dir
+        PALSERVER_DIR: *palserver-dir
       target: steamcmd
     restart: on-failure:3
   palserver:
     <<: *service
     build:
       args:
-        SAVED_DIR: *saved-dir
         PALSERVER_DIR: *palserver-dir
         RCON_PORT: $RCON_PORT
     command: $COMMAND
@@ -42,4 +38,3 @@ services:
     profiles: [doexit]
 volumes:
   palserver:
-  saved:

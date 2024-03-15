@@ -98,7 +98,7 @@ docker compose stop
 #### 2.4. Making a backup
 Docker tools which make backups of volumes can be used.
 
-Save files are inside the smaller `palworld_saved` volume and the server installation is inside the bigger `palworld_palserver` volume.
+The server installation is inside the `palworld_palserver` volume.
 #### 2.5. Updating the server
 
 ```
