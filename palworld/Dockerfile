@@ -1,4 +1,5 @@
-FROM cm2network/steamcmd AS steamcmd-mkdir
+ARG STEAMCMD_VERSION
+FROM cm2network/steamcmd$STEAMCMD_VERSION AS steamcmd-mkdir
 ARG PALSERVER_DIR
 RUN mkdir -p $PALSERVER_DIR
 
